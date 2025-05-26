@@ -1,6 +1,6 @@
 import { LocalGrind } from "@/lib/storage";
 import { MapPin, Plus, Minus, BarChart3, Crown, Diamond, Trash2, MoreVertical } from "lucide-react";
-import { hasGreatOne } from "@/lib/species-data";
+import { GREAT_ONE_SPECIES } from "@/lib/species-data";
 import { useState } from "react";
 
 interface GrindCardProps {
@@ -22,6 +22,9 @@ export function GrindCard({ grind, onAddKill, onRemoveKill, onAddDiamond, onRemo
   const [showMenu, setShowMenu] = useState(false);
   const diamondRate = grind.kills > 0 ? ((grind.diamonds / grind.kills) * 100).toFixed(1) : "0.0";
   const rareRate = grind.kills > 0 ? ((grind.rares / grind.kills) * 100).toFixed(1) : "0.0";
+
+  // Check if species has Great One capability
+  const hasGreatOne = GREAT_ONE_SPECIES.includes(grind.species);
 
   return (
     <div className="bg-gray-900 border border-gray-700 rounded-lg p-4 mb-4 hover:border-green-500 transition-colors">
@@ -169,7 +172,7 @@ export function GrindCard({ grind, onAddKill, onRemoveKill, onAddDiamond, onRemo
         </div>
 
         {/* Great One Button */}
-        {hasGreatOne(grind.species) && !grind.goHarvested && onMarkGO && (
+        {hasGreatOne && !grind.goHarvested && onMarkGO && (
           <div className="flex justify-center pt-2">
             <button
               onClick={() => onMarkGO(grind)}
