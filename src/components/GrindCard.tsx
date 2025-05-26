@@ -166,4 +166,39 @@ export function GrindCard({ grind, onAddKill, onRemoveKill, onAddDiamond, onRemo
         {/* Troll Tracking */}
         <div className="flex items-center justify-between bg-gray-700 rounded-lg p-2">
           <button
-            onClick={() => onRem
+            onClick={() => onRemoveTroll(grind)}
+            className="text-red-400 hover:text-red-300 p-1"
+            disabled={grind.trolls <= 0}
+          >
+            <Minus className="w-4 h-4" />
+          </button>
+          <span className="text-orange-400 font-medium text-sm">Troll</span>
+          <button
+            onClick={() => onAddTroll(grind)}
+            className="text-green-400 hover:text-green-300 p-1"
+          >
+            <Plus className="w-4 h-4" />
+          </button>
+        </div>
+
+        {/* Great One Button - Only show for species that have GOs */}
+        {hasGreatOne && onMarkGO && (
+          <button
+            onClick={() => onMarkGO(grind)}
+            disabled={grind.goHarvested}
+            className={`flex items-center justify-center space-x-2 px-4 py-2 rounded-lg font-medium transition-colors ${
+              grind.goHarvested
+                ? 'bg-yellow-600 text-yellow-100 cursor-not-allowed'
+                : 'bg-yellow-700 hover:bg-yellow-600 text-yellow-100'
+            }`}
+          >
+            <Crown className="w-4 h-4" />
+            <span className="text-sm">
+              {grind.goHarvested ? 'GO Harvested!' : 'Mark GO'}
+            </span>
+          </button>
+        )}
+      </div>
+    </div>
+  );
+}
