@@ -63,3 +63,135 @@ export function GrindCard({ grind, onAddKill, onRemoveKill, onAddDiamond, onRemo
                   <Trash2 className="w-4 h-4" />
                   <span>Delete</span>
                 </button>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      
+      <div className="space-y-4 mb-6">
+        {/* Regular Kills */}
+        <div className="flex items-center justify-between bg-slate-700/50 rounded-lg p-4">
+          <div className="text-slate-300 font-medium">Kills</div>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => onRemoveKill(grind)}
+              className="h-8 w-8 bg-red-600/20 border border-red-600 text-red-400 hover:bg-red-600/30 rounded flex items-center justify-center disabled:opacity-50"
+              disabled={grind.kills === 0}
+            >
+              <Minus className="w-4 h-4" />
+            </button>
+            <span className="text-2xl font-bold text-white min-w-[3rem] text-center">
+              {grind.kills}
+            </span>
+            <button
+              onClick={() => onAddKill(grind)}
+              className="h-8 w-8 bg-green-600/20 border border-green-600 text-green-400 hover:bg-green-600/30 rounded flex items-center justify-center"
+            >
+              <Plus className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Diamonds WITH RATE */}
+        <div className="flex items-center justify-between bg-slate-700/50 rounded-lg p-4">
+          <div className="flex flex-col">
+            <div className="text-cyan-400 font-medium">Diamonds</div>
+            <div className="text-sm text-cyan-300 opacity-90">{diamondRate}% rate</div>
+          </div>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => onRemoveDiamond(grind)}
+              className="h-8 w-8 bg-red-600/20 border border-red-600 text-red-400 hover:bg-red-600/30 rounded flex items-center justify-center disabled:opacity-50"
+              disabled={grind.diamonds === 0}
+            >
+              <Minus className="w-4 h-4" />
+            </button>
+            <span className="text-2xl font-bold text-cyan-400 min-w-[3rem] text-center">
+              {grind.diamonds}
+            </span>
+            <button
+              onClick={() => onAddDiamond(grind)}
+              className="h-8 w-8 bg-cyan-600/20 border border-cyan-600 text-cyan-400 hover:bg-cyan-600/30 rounded flex items-center justify-center"
+            >
+              <Plus className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Rares WITH RATE */}
+        <div className="flex items-center justify-between bg-slate-700/50 rounded-lg p-4">
+          <div className="flex flex-col">
+            <div className="text-purple-400 font-medium">Rares</div>
+            <div className="text-sm text-purple-300 opacity-90">{rareRate}% rate</div>
+          </div>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => onRemoveRare(grind)}
+              className="h-8 w-8 bg-red-600/20 border border-red-600 text-red-400 hover:bg-red-600/30 rounded flex items-center justify-center disabled:opacity-50"
+              disabled={grind.rares === 0}
+            >
+              <Minus className="w-4 h-4" />
+            </button>
+            <span className="text-2xl font-bold text-purple-400 min-w-[3rem] text-center">
+              {grind.rares}
+            </span>
+            <button
+              onClick={() => onAddRare(grind)}
+              className="h-8 w-8 bg-purple-600/20 border border-purple-600 text-purple-400 hover:bg-purple-600/30 rounded flex items-center justify-center"
+            >
+              <Plus className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Trolls */}
+        <div className="flex items-center justify-between bg-slate-700/50 rounded-lg p-4">
+          <div className="text-orange-400 font-medium">Trolls</div>
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={() => onRemoveTroll(grind)}
+              className="h-8 w-8 bg-red-600/20 border border-red-600 text-red-400 hover:bg-red-600/30 rounded flex items-center justify-center disabled:opacity-50"
+              disabled={grind.trolls === 0}
+            >
+              <Minus className="w-4 h-4" />
+            </button>
+            <span className="text-2xl font-bold text-orange-400 min-w-[3rem] text-center">
+              {grind.trolls}
+            </span>
+            <button
+              onClick={() => onAddTroll(grind)}
+              className="h-8 w-8 bg-orange-600/20 border border-orange-600 text-orange-400 hover:bg-orange-600/30 rounded flex items-center justify-center"
+            >
+              <Plus className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+
+        {/* Great One Button */}
+        {hasGreatOne(grind.species) && !grind.goHarvested && onMarkGO && (
+          <div className="flex justify-center pt-2">
+            <button
+              onClick={() => onMarkGO(grind)}
+              className="bg-yellow-600 hover:bg-yellow-700 text-white px-6 py-2 rounded-lg flex items-center gap-2"
+            >
+              <Crown className="w-4 h-4" />
+              Mark Great One
+            </button>
+          </div>
+        )}
+
+        {/* View Details Button */}
+        <div className="flex justify-center pt-2">
+          <button
+            onClick={() => onViewDetails(grind)}
+            className="bg-slate-600 hover:bg-slate-700 text-white px-4 py-2 rounded-lg flex items-center gap-2"
+          >
+            <BarChart3 className="w-4 h-4" />
+            View Details
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
