@@ -1,5 +1,4 @@
 import { LocalGrind } from "@/lib/storage";
-import { SoundButton } from "@/components/ui/sound-button";
 import { MapPin, Plus, Minus, BarChart3, Crown, Diamond, Trash2, MoreVertical } from "lucide-react";
 import { hasGreatOne } from "@/lib/species-data";
 import { useState } from "react";
@@ -21,7 +20,6 @@ interface GrindCardProps {
 
 export function GrindCard({ grind, onAddKill, onRemoveKill, onAddDiamond, onRemoveDiamond, onAddRare, onRemoveRare, onAddTroll, onRemoveTroll, onViewDetails, onMarkGO, onDelete }: GrindCardProps) {
   const [showMenu, setShowMenu] = useState(false);
-  // Calculate rates
   const diamondRate = grind.kills > 0 ? ((grind.diamonds / grind.kills) * 100).toFixed(1) : "0.0";
   const rareRate = grind.kills > 0 ? ((grind.rares / grind.kills) * 100).toFixed(1) : "0.0";
 
@@ -65,65 +63,3 @@ export function GrindCard({ grind, onAddKill, onRemoveKill, onAddDiamond, onRemo
                   <Trash2 className="w-4 h-4" />
                   <span>Delete</span>
                 </button>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-      
-      {/* Rest of your existing grind card content */}
-      <div className="grid grid-cols-2 gap-4 mb-4">
-        {/* Kills */}
-        <div className="bg-gray-800 rounded-lg p-3">
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-gray-300 text-sm">Kills</span>
-            <div className="flex items-center gap-2">
-              <SoundButton
-                onClick={() => onRemoveKill(grind)}
-                disabled={grind.kills === 0}
-                className="bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white w-6 h-6 rounded"
-              >
-                <Minus className="w-3 h-3" />
-              </SoundButton>
-              <SoundButton
-                onClick={() => onAddKill(grind)}
-                className="bg-green-600 hover:bg-green-700 text-white w-6 h-6 rounded"
-              >
-                <Plus className="w-3 h-3" />
-              </SoundButton>
-            </div>
-          </div>
-          <div className="text-2xl font-bold text-white">{grind.kills}</div>
-        </div>
-
-        {/* Diamonds WITH RATE */}
-        <div className="bg-cyan-900/50 rounded-lg p-3">
-          <div className="flex items-center justify-between mb-2">
-            <div>
-              <span className="text-cyan-300 text-sm">Diamonds</span>
-              <div className="text-xs text-cyan-400">{diamondRate}% rate</div>
-            </div>
-            <div className="flex items-center gap-2">
-              <SoundButton
-                onClick={() => onRemoveDiamond(grind)}
-                disabled={grind.diamonds === 0}
-                className="bg-red-600 hover:bg-red-700 disabled:bg-gray-600 text-white w-6 h-6 rounded"
-              >
-                <Minus className="w-3 h-3" />
-              </SoundButton>
-              <SoundButton
-                onClick={() => onAddDiamond(grind)}
-                className="bg-cyan-600 hover:bg-cyan-700 text-white w-6 h-6 rounded"
-              >
-                <Plus className="w-3 h-3" />
-              </SoundButton>
-            </div>
-          </div>
-          <div className="text-2xl font-bold text-cyan-400">{grind.diamonds}</div>
-        </div>
-
-        {/* Continue with your existing grind card content... */}
-      </div>
-    </div>
-  );
-}
