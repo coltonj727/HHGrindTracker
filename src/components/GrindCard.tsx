@@ -1,6 +1,5 @@
 import { LocalGrind } from "@/lib/storage";
 import { MapPin, Plus, Minus, BarChart3, Crown, Diamond, Trash2, MoreVertical } from "lucide-react";
-import { GREAT_ONE_SPECIES } from "@/lib/species-data";
 import { useState } from "react";
 
 interface GrindCardProps {
@@ -23,7 +22,12 @@ export function GrindCard({ grind, onAddKill, onRemoveKill, onAddDiamond, onRemo
   const diamondRate = grind.kills > 0 ? ((grind.diamonds / grind.kills) * 100).toFixed(1) : "0.0";
   const rareRate = grind.kills > 0 ? ((grind.rares / grind.kills) * 100).toFixed(1) : "0.0";
 
-  // Check if species has Great One capability
+  // Great One species list (embedded to avoid import issues)
+  const GREAT_ONE_SPECIES = [
+    "Whitetail Deer", "Red Deer", "Black Bear", "Moose",
+    "Fallow Deer", "Red Fox", "Ring-Necked Pheasant", "Himalayan Tahr"
+  ];
+  
   const hasGreatOne = GREAT_ONE_SPECIES.includes(grind.species);
 
   return (
