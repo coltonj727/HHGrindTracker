@@ -25,7 +25,7 @@ type UnauthorizedBehavior = "returnNull" | "throw";
 
 export const getQueryFn: <T>(options: {
   on401: UnauthorizedBehavior;
-}) => (context: { queryKey: readonly string[] }) => Promise<T | null> = (options) => {
+}) => (context: { queryKey: string[] }) => Promise<T | null> = (options) => {
   return async (context) => {
     try {
       const res = await fetch(context.queryKey[0], {
