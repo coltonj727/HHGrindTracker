@@ -1,12 +1,9 @@
-import { useState, useEffect } from "react";
-import { ArrowLeft, Volume2, VolumeX, Moon, Sun, User, Trash2, Download } from "lucide-react";
-import { useTheme } from "@/lib/theme";
+import { useState } from "react";
+import { ArrowLeft, User, Trash2, Download } from "lucide-react";
 import { grindStorage } from "@/lib/storage";
 import { Link } from "wouter";
 
 export default function Settings() {
-  const { theme, setTheme } = useTheme();
-  const [audioEnabled, setAudioEnabled] = useState(true);
   const grinds = grindStorage.getGrinds();
 
   const handleExportData = () => {
@@ -32,7 +29,6 @@ export default function Settings() {
     }
   };
 
-  const totalKills = grinds.reduce((sum, grind) => sum + grind.kills, 0);
   const totalDiamonds = grinds.reduce((sum, grind) => sum + grind.diamonds, 0);
   const greatOnesHarvested = grinds.filter(grind => grind.goHarvested).length;
 
@@ -101,6 +97,17 @@ export default function Settings() {
               <Trash2 className="w-4 h-4 mr-2" />
               Clear All Data
             </button>
+          </div>
+        </div>
+
+        {/* About */}
+        <div className="bg-slate-800 border border-slate-700 rounded-xl p-6">
+          <h3 className="text-lg font-bold text-white mb-4">About HeadHunter</h3>
+          <div className="space-y-2 text-sm text-slate-400">
+            <p>Version 1.0.0</p>
+            <p>Professional COTW hunting progress tracker</p>
+            <p>Featuring all 16 authentic game reserves</p>
+            <p>Built for serious hunters who track their diamond rates</p>
           </div>
         </div>
       </div>
